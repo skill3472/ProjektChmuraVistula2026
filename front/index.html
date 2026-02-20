@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Counter</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+    #count { font-size: 2em; margin: 20px; }
+    button { font-size: 1.2em; padding: 10px 20px; }
+  </style>
+</head>
+<body>
+  <h1>Counter Demo</h1>
+  <div>Current count:</div>
+  <div id="count">...</div>
+  <button id="inc">Increment</button>
+
+  <script>
+    async function fetchCount() {
+      const res = await fetch('/counter');
+      const data = await res.json();
+      document.getElementById('count').textContent = data.value;
+    }
+    async function increment() {
+      const res = await fetch('/counter/increment', {method: 'POST'});
+      const data = await res.json();
+      document.getElementById('count').textContent = data.value;
+    }
+    document.getElementById('inc').onclick = increment;
+    fetchCount();
+  </script>
+</body>
+</html>

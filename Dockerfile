@@ -18,9 +18,9 @@ COPY . .
 
 EXPOSE 8000
 
-RUN useradd -m flask \
-    && chown -R flask:flask /app
+RUN useradd -m fastapi \
+    && chown -R fastapi:fastapi /app
 
-USER flask
+USER fastapi
 
 CMD ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Depends
-from sqlalchemy.orm import Session
 from contextlib import asynccontextmanager
 
-from src.database import get_db, Base, engine
+from fastapi import Depends, FastAPI
+from sqlalchemy.orm import Session
+
+from src.database import Base, engine, get_db
 from src.models import Counter
 
 
@@ -14,8 +15,9 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+
 @app.get("/counter")
-def read_counter(db: Session = Depends(get_db)):
+def read_counter(db: Session = Depends(get_db)):  # noqa: B008
     counter = db.query(Counter).first()
     if not counter:
         counter = Counter(value=0)
@@ -24,8 +26,9 @@ def read_counter(db: Session = Depends(get_db)):
         db.refresh(counter)
     return {"value": counter.value}
 
+
 @app.post("/counter/increment")
-def increment_counter(db: Session = Depends(get_db)):
+def increment_counter(db: Session = Depends(get_db)):  # noqa: B008
     counter = db.query(Counter).first()
     if not counter:
         counter = Counter(value=0)
@@ -35,6 +38,8 @@ def increment_counter(db: Session = Depends(get_db)):
     db.refresh(counter)
     return {"value": counter.value}
 
+
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="127.0.0.1", port=8000)

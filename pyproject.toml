@@ -13,5 +13,23 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "pre-commit>=4.5.1",
     "ruff>=0.15.2",
 ]
+
+[tool.ruff]
+line-length = 120
+target-version = "py314"
+
+[tool.ruff.lint]
+# E: pycodestyle errors
+# W: pycodestyle warnings
+# F: Pyflakes
+# I: isort (sortowanie importów)
+# B: flake8-bugbear (częste błędy)
+select = ["E", "W", "F", "I", "B"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

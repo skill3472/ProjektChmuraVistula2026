@@ -1,0 +1,15 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff linter
+        entry: uv run ruff check
+        language: system
+        types_or: [python, pyi]
+        args: [ --fix ]
+      
+      - id: ruff-format
+        name: ruff formatter
+        entry: uv run ruff format
+        language: system
+        types_or: [python, pyi]

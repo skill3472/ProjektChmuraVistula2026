@@ -4,6 +4,8 @@ from src.database import Base
 
 
 class Counter(Base):
+    """Database model for a simple counter."""
+
     __tablename__ = "counter"
 
     id = Column(Integer, primary_key=True, index=True)

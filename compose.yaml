@@ -41,6 +41,8 @@ services:
       - "80:80"
     depends_on:
       - backend
+    environment:
+      - BACKEND_HOST=backend
     networks:
       - app-network
 

@@ -1,4 +1,6 @@
 # Into to cloud computing project, Vistula University 2026
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fprojekt-vistula.mtym.me%2Fcounter&query=value&label=current%20count)
+
 TODO, fill out project description once it's more clearly defined
 
 Locally launch like this:

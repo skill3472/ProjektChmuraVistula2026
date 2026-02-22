@@ -17,16 +17,25 @@
 
   <script>
     async function fetchCount() {
-      const res = await fetch('/counter');
-      const data = await res.json();
-      document.getElementById('count').textContent = data.value;
+      try {
+        const res = await fetch('/counter');
+        const data = await res.json();
+        document.getElementById('count').textContent = data.value;
+      } catch (error) {
+        console.error("Failed to fetch count:", error);
+      } finally {
+        setTimeout(fetchCount, 2000);
+      }
     }
+
     async function increment() {
       const res = await fetch('/counter/increment', {method: 'POST'});
       const data = await res.json();
       document.getElementById('count').textContent = data.value;
     }
+
     document.getElementById('inc').onclick = increment;
+
     fetchCount();
   </script>
 </body>

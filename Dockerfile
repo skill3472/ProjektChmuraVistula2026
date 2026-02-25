@@ -16,7 +16,7 @@ RUN uv sync --frozen
 
 COPY . .
 
-EXPOSE 8000
+EXPOSE 80
 
 RUN useradd -m fastapi \
     && chown -R fastapi:fastapi /app

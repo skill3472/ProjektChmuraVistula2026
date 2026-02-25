@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 
-from fastapi import Depends, FastAPI
+from fastapi import Depends, FastAPI, Request
+from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
 from src.counter_utils import create_counter
@@ -16,6 +17,12 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+templates = Jinja2Templates(directory="front")
+
+@app.get("/")
+def get_root(request: Request):
+    """Renders a simple HTML page with the current counter value."""
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/counter")

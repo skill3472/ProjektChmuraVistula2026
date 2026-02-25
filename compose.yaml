@@ -25,24 +25,8 @@ services:
       - db
     environment:
       DATABASE_URL: postgresql+psycopg://postgres:postgres@db:5432/appdb
-    expose:
-      - "8000"
-    networks:
-      - app-network
-
-  nginx:
-    build:
-      context: .
-      dockerfile: Dockerfile.nginx
-    container_name: nginx
-    image: cloudprojektvistula_nginx:latest
-    restart: unless-stopped
     ports:
-      - "80:80"
-    depends_on:
-      - backend
-    environment:
-      - BACKEND_HOST=backend
+      - "80:8000"
     networks:
       - app-network
 

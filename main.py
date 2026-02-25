@@ -17,7 +17,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
-templates = Jinja2Templates(directory="front")
+templates = Jinja2Templates(directory="templates")
 
 @app.get("/")
 def get_root(request: Request):

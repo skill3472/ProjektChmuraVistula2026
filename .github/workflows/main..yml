@@ -5,8 +5,7 @@ on:
     branches: [ "master" ]
 
 env:
-  BACKEND_IMAGE_NAME: skill347/cloud-project-vistula2026:latest
-  NGINX_IMAGE_NAME: skill347/cloud-project-vistula2026-nginx:latest
+  IMAGE_NAME: skill347/cloud-project-vistula2026:latest
 
 jobs:
   build_and_push:
@@ -32,7 +31,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ env.BACKEND_IMAGE_NAME }}
+          tags: ${{ env.IMAGE_NAME }}
           provenance: true
           sbom: true
 

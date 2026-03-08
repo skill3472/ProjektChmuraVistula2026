@@ -30,7 +30,7 @@ def get_root(request: Request):
 def read_counter(cosmos: CosmosClient = Depends(get_cosmos_client)):  # noqa: B008
     """Return the current counter value, creating it if missing."""
     repo = DatabaseRepository()
-    count = repo.get_count_db(None, cosmos)
+    count = repo.get_count_db(cosmos)
     return {"value": count}
 
 
@@ -38,5 +38,5 @@ def read_counter(cosmos: CosmosClient = Depends(get_cosmos_client)):  # noqa: B0
 def increment_counter(cosmos: CosmosClient = Depends(get_cosmos_client)):  # noqa: B008
     """Increment the counter value and return the updated value."""
     repo = DatabaseRepository()
-    count = repo.increment_counter_db(None, cosmos)
+    count = repo.increment_counter_db(cosmos)
     return {"value": count}

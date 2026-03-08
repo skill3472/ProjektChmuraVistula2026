@@ -5,6 +5,7 @@ from azure.cosmos import CosmosClient
 
 class DatabaseRepository:
     """Repository class to handle Cosmos DB operations for the counter."""
+
     db_name = os.environ.get("COSMOS_DB", "counterdb")
     container_name = os.environ.get("COSMOS_CONTAINER", "counter")
 
@@ -18,14 +19,14 @@ class DatabaseRepository:
             container = database.create_container(id=self.container_name, partition_key="/id")
         return container
 
-    def create_counter_db(self, _db, cosmos: CosmosClient) -> int:
+    def create_counter_db(self, cosmos: CosmosClient) -> int:
         """Create a new counter with value 0 and persist it."""
         container = self._get_container(cosmos)
         item = {"id": "main", "value": 0}
         container.upsert_item(item)
         return 0
 
-    def get_count_db(self, _db, cosmos: CosmosClient) -> int:
+    def get_count_db(self, cosmos: CosmosClient) -> int:
         """Retrieve the current counter value from Cosmos DB."""
         container = self._get_container(cosmos)
         try:
@@ -34,7 +35,7 @@ class DatabaseRepository:
         except Exception:
             return 0
 
-    def increment_counter_db(self, _db, cosmos: CosmosClient) -> int:
+    def increment_counter_db(self, cosmos: CosmosClient) -> int:
         """Increment the counter value and persist the change in Cosmos DB."""
         container = self._get_container(cosmos)
         try:
